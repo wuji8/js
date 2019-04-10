@@ -1,13 +1,252 @@
+"ui";
+storage = storages.create("WX注册");
+
+Username1 = storage.get("Username1");
+if (!Username1) {
+    Username1 = "";
+};
+Password1 = storage.get("Password1");
+if (!Password1) {
+    Password1 = "";
+};
+Usernamewj1 = storage.get("Usernamewj1");
+if (!Usernamewj1) {
+    Usernamewj1 = "";
+};
+Passwordwj1 = storage.get("Passwordwj1");
+if (!Passwordwj1) {
+    Passwordwj1 = "";
+};
+grade1 = storage.get("grade1");
+if (!grade1) {
+    grade1 = "";
+};
+itemID1 = storage.get("itemID1");
+if (!itemID1) {
+    itemID1 = "";
+};
+Tokenyq = storage.get("Tokenyq");
+if (!Tokenyq) {
+    Tokenyq = "";
+};
+cb1 = storage.get("cb1");
+if (!cb1) {
+    cb1 = "";
+};
+cb2 = storage.get("cb2");
+if (!cb2) {
+    cb2 = "";
+};
+flypattern = storage.get("flypattern");
+if (!flypattern) {
+    flypattern = "";
+};
+vpnpattern = storage.get("vpnpattern");
+if (!vpnpattern) {
+    vpnpattern = "";
+};
+Platformoptions1 = storage.get("Platformoptions1");
+if (!Platformoptions1) {
+    Platformoptions1 = "";
+};
+Platformoptions2 = storage.get("Platformoptions2");
+if (!Platformoptions2) {
+    Platformoptions2 = "";
+};
+Platformoptions3 = storage.get("Platformoptions3");
+if (!Platformoptions3) {
+    Platformoptions3 = "";
+};
+Platformoptions4 = storage.get("Platformoptions4");
+if (!Platformoptions4) {
+    Platformoptions4 = "";
+};
+Platformoptions5 = storage.get("Platformoptions5");
+if (!Platformoptions5) {
+    Platformoptions5 = "";
+};
+Platformoptions6 = storage.get("Platformoptions6");
+if (!Platformoptions6) {
+    Platformoptions6 = "";
+};
+
+ui.layout(
+    <vertical>
+	        <ScrollView>
+	            <vertical>
+		        <appbar>
+		            <toolbar title="WX注册脚本设置界面"/>
+		        </appbar>
+		        <radiogroup mariginTop="16">
+		        <text textSize="17sp" textColor="#000000" margin="5" textStyle="bold">----------VPN或飞行模式选项----------</text>
+			        <radio  id="flypattern" text="飞行" checked="true" />
+		            <radio  id="vpnpattern" text="VPN" />
+		            </radiogroup>
+		          
+		             <radiogroup mariginTop="16">
+		            <text textSize="17sp" textColor="#000000" margin="5" textStyle="bold">----------平台选项----------</text>
+			        <radio  id="Platformoptions1" text="小鱼" checked="true" />
+		            <radio  id="Platformoptions2" text="语雀" />
+		            <radio  id="Platformoptions3" text="火云" />
+		            <radio  id="Platformoptions4" text="广东API" />
+			        <radio  id="Platformoptions5" text="玉米" />
+			        <radio  id="Platformoptions6" text="尚一品" />
+		              </radiogroup>
+		              
+		             <radiogroup mariginTop="16">
+			        <text textSize="17sp" textColor="#000000" margin="5" textStyle="bold">----------滑块选项----------</text>
+			        <radio  id="cb1" text="脚本自动" checked="true" />
+		            <radio  id="cb2" text="手动"/>
+		        </radiogroup>
+		        
+		        <text textSize="17sp" textColor="#000000" margin="5" textStyle="bold">----------取码平台信息填写----------</text>
+		         <text text="取码平台账号:" textColor="black" textSize="15sp" marginTop="16"/>
+		         <input id="Username1" hint="105221-lid">{Username1}</input>
+		         <text text="取码平台密码:" textColor="black" textSize="15sp" marginTop="16"/>
+		         <input id="Password1" hint="215d5fe">{Password1}</input>
+		     	 <text text="取码平台项目ID:" textColor="black" textSize="15sp" marginTop="16"/>
+		         <input id="itemID1" hint="329">{itemID1}</input>
+		         <text text="语雀平台Token:" textColor="black" textSize="15sp" marginTop="16"/>
+		         <input id="Tokenyq" hint="C2C96E6A1FC8dsfF79EFF39035851C">{Tokenyq}</input>
+		         
+		         <text textSize="17sp" textColor="#000000" margin="5" textStyle="bold">----------无极平台信息填写----------</text>
+		         <text text="无极辅助平台账号:" textColor="black" textSize="15sp" marginTop="16"/>
+		         <input id="Usernamewj1" hint="13226607795">{Usernamewj1}</input>
+		         <text text="无极辅助平台密码:" textColor="black" textSize="15sp" marginTop="16"/>
+		         <input id="Passwordwj1" hint="sdjkees">{Passwordwj1}</input>
+		         <text text="辅助等级限制:" textColor="black" textSize="15sp" marginTop="16"/>
+		         <input id="grade1" hint="0">{grade1}</input>
+		  		<button id="ok" text="开始运行脚本" w="380" style="Widget.AppCompat.Button.Colored"/>
+	            </vertical>
+	        </ScrollView>
+	    </vertical>
+)
+
+ui.ok.click(() => {
+    saveConf();
+    threads.start(function () {
+        main();
+    })
+});
+
+
+function saveConf() {
+    storage.put("Username1", ui.Username1.text() + "");
+    storage.put("Password1", ui.Password1.text() + "");
+    storage.put("Usernamewj1", ui.Usernamewj1.text() + "");
+    storage.put("Passwordwj1", ui.Passwordwj1.text() + "");
+    storage.put("grade1", ui.grade1.text() + "");
+	storage.put("itemID1", ui.itemID1.text() + "");
+	storage.put("Tokenyq", ui.Tokenyq.text() + "");
+	storage.put("cb1", ui.cb1.checked + "");
+    storage.put("cb2", ui.cb2.checked + "");
+    storage.put("flypattern", ui.flypattern.checked + "");
+    storage.put("vpnpattern", ui.vpnpattern.checked + "");
+    storage.put("Platformoptions1", ui.Platformoptions1.checked + "");
+    storage.put("Platformoptions2", ui.Platformoptions2.checked + "");
+    storage.put("Platformoptions3", ui.Platformoptions3.checked + "");
+    storage.put("Platformoptions4", ui.Platformoptions4.checked + "");
+    storage.put("Platformoptions5", ui.Platformoptions5.checked + "");
+    storage.put("Platformoptions6", ui.Platformoptions6.checked + "");
+};
+    
+function main(){
+  if (ui.Platformoptions1.checked){
+  	Platformoptions = '小鱼'
+  	interlinkage = 'http://api.juxiutu.com/'
+  }
+   if (ui.Platformoptions2.checked){
+  	Platformoptions = '语雀'
+  }
+  if (ui.Platformoptions3.checked){
+  	Platformoptions = '火云'
+  }
+ if (ui.Platformoptions4.checked){
+  	Platformoptions = '广东API'
+  }
+
+ if (ui.Platformoptions4.checked){
+  	Platformoptions = '广东API'
+  }
+  if (ui.Platformoptions5.checked){
+  	Platformoptions = '玉米'
+  	interlinkage = 'http://api.jyzszp.com/'
+  }
+  if (ui.Platformoptions6.checked){
+  	Platformoptions = '尚一品'
+  }
+  if  (ui.flypattern.checked){
+  	flypattern = '飞行'
+  }
+  if  (ui.vpnpattern.checked){
+  	vpnpattern = 'VPN'
+  }
+ if  (ui.cb2.checked){
+  	slidingBB = 0
+  }
+  if  (ui.cb1.checked){
+ 	 slidingBB = 1
+  }
+  
+Username = ui.Username1.text()
+Password = ui.Password1.text()
+itemID = ui.itemID1.text()
+Usernamewj = ui.Usernamewj1.text()
+Passwordwj = ui.Passwordwj1.text()
+grade = ui.grade1.text()
+toastLog(Platformoptions)
+   requestScreenCapture();
+	modelss = device.model
+	toastLog(modelss) 
+	while (true) {
+			if (Platformoptions == "语雀"){
+				 TOken = ui.Tokenyq.text()
+				phonenumber = GetNumber_yuque(Username,TOken,itemID)
+			}
+			if (Platformoptions == "广东API"){
+				phonenumber = get_numberapi(Username,Password)
+			}
+			if ((Platformoptions == "小鱼")||(Platformoptions == "玉米")){
+				TOken = GetToken_xiaoyu(interlinkage,Username,Password)
+				vphonenumber = GetNumber_xiaoyu(interlinkage,itemID,TOken,Username)
+			}
+			if (Platformoptions == "火云"){
+				TOken = GetToken_huoyun(Username,Password)
+				phonenumber = GetNumber_huoyun(itemID,TOken)
+			}
+			if (Platformoptions == "尚一品"){
+				phonenumber = GetNumber_syp(Username,Password,itemID)
+			}
+			phonenumber ="135659"
+			pswpsw= randomRange(8, 12)
+			log(phonenumber+'/'+pswpsw)
+			enterCG(phonenumber)
+			if(flypattern =='飞行'){
+				changefly()
+			}
+			if (vpnpattern =='VPN'){
+				changeVPN()
+			}
+			registerWX()
+				if ((Platformoptions == "小鱼")||(Platformoptions == "玉米")){
+					GetNumberBlack_xiaoyu(interlinkage,Username,TOken,phonenumber,itemID)
+				}
+				if (Platformoptions == "火云"){
+					GetNumberBlack_huoyun(TOken,phonenumber,itemID)
+				}
+				if (Platformoptions == "尚一品"){
+					GetNumberBlack_syp(Username,Password,itemID,phonenumber)
+				}
+	}
+    
+}
 
 function clickByText(energyType,noFindExit,exceptionMsg){
     if(textEndsWith(energyType).exists()){
         textEndsWith(energyType).find().forEach(function(pos){
             var posb=pos.bounds();
-            // click(posb.centerX(),posb.centerY()-60);
-          	//press(posb.centerX()+random(0, 60),posb.centerY()-random(45, 65),random(2, 10));
-          	 // click(posb.centerX()+random(0, 60),posb.centerY()-random(45, 65));
           	 sleeps(300,800);
-       		press(posb.centerX()+random(0, 60),posb.centerY()-random(55, 65), random(20, 180));
+       		press(posb.centerX()+random(0, 60),posb.centerY()-random(55, 65), random(20, 300));
        		 sleeps(800,1500);
         });
     }else{
@@ -34,9 +273,7 @@ function clickbounds_longClick(ckbound){//随机点
 	var yy1 =random(y1*1, y2*1)
 	toastLog(xx1+"/"+yy1)
 	sleeps(200,900);
-	//press(parseInt(xx1)*1+random(0, 15),parseInt(yy1)*1+random(0, 60), random(2, 10));
-	//click(parseInt(xx1)*1+random(0, 15),parseInt(yy1)*1+random(0, 60));
-	press(parseInt(xx1)*1+random(0, 15),parseInt(yy1)*1+random(0, 60), random(2500, 3500));
+	press(parseInt(xx1)*1+random(0, 5),parseInt(yy1)*1+random(0, 8), random(4500, 6500));
 	sleeps(500,1500);
 	//click(xx1,yy1)
 }
@@ -53,11 +290,8 @@ function clickbounds(ckbound){//随机点
 	var yy1 =random(y1*1, y2*1)
 	toastLog(xx1+"/"+yy1)
 	sleeps(200,900);
-	//press(parseInt(xx1)*1+random(0, 15),parseInt(yy1)*1+random(0, 60), random(2, 10));
-	//click(parseInt(xx1)*1+random(0, 15),parseInt(yy1)*1+random(0, 60));
-	press(parseInt(xx1)*1+random(0, 15),parseInt(yy1)*1+random(0, 60), random(20, 180));
+	press(parseInt(xx1)*1+random(0, 15),parseInt(yy1)*1+random(0, 60), random(20, 300));
 	sleeps(500,1500);
-	//click(xx1,yy1)
 }
 function getNowTime(){
     Date.prototype.format = function(fmt) { 
@@ -156,13 +390,11 @@ function changeVPN(){//切换VPN
     log(isConn);
 
     // 已连接的  需要先断开
-    if (isConn.indexOf("已") > 0) {
+    if (textEndsWith("已连接").exists()) {
         log("vpn 已连接");
-
         sleeps(1500,2000);
         click(500, 300); // 点击 设置好的vpn
         sleeps(800,1200);
-
         while(true){
             if (textEndsWith("断开连接").exists()) {
                 clickByText("断开连接");
@@ -179,7 +411,6 @@ function changeVPN(){//切换VPN
     sleeps(1500,2000);
     click(500, 300); // 点击 设置好的vpn
     sleeps(1500,2000);
-
     while(true){
         if (textEndsWith("连接").exists()) {
             sleeps(1300,1700);
@@ -192,20 +423,14 @@ function changeVPN(){//切换VPN
         }
     }
 
-    var isConn  = "";
+   
     while(true){
-        id("list").className("android.widget.TextView").find().forEach(function(tv){
-    
-            if(tv.text() != ""){
-                isConn  = isConn + tv.text();
-            }
-        });
-        log(isConn);
-        if (isConn.indexOf("已") > 0) {
-            toastLog("vpn 已连接");
+       if (textEndsWith("已连接").exists()) {  
+    		toastLog("vpn 已连接");
             break;
-        } else if (isConn.indexOf("失败") > 0) {
+        } else if(textEndsWith("失败").exists()) {  
             toastLog("vpn 连接失败");
+            changeVPN();
             break;
         } else {
             toastLog("等待vpn连接");
@@ -213,16 +438,12 @@ function changeVPN(){//切换VPN
         }
     }
 
-    if (isConn.indexOf("失败") > 0) {
-        toastLog("VPN连接失败  重新开始");
-        changeVPN();
-        // return false;
-    }
 
 }
 function rechristen(phoneNum,pswpsw){//重命名
-	 launch("com.igaiji.privacy");
+app.launchApp("IG刺猬精灵");
     toastLog("等待IG启动");
+     sleeps(1500,2000);
     while (true) {
     	var Backuplist = id("ll_copy").findOne(random(4500, 6500)); 
     	if (Backuplist != null) {
@@ -235,10 +456,17 @@ function rechristen(phoneNum,pswpsw){//重命名
         	if (modelss == 'Z2 Plus'){
 				click(971,  615)
 			}
-			if ((modelss == 'G0215D')||(modelss == 'LEX820')){
+        	if (modelss == 'Mi-4c'){
+				click(982,  566)
+			}
+			if (modelss == 'LEX820'){
 				click(1312,  724)	
 			}	
+			if (modelss == 'G0215D'){
+				click(1289,  828)	
+			}
         }
+      
         if(textEndsWith("确定").exists()){
         	id("tv_alias_name").findOne().click()
         	setText(phoneNum+'--'+pswpsw+'--成功')
@@ -248,9 +476,16 @@ function rechristen(phoneNum,pswpsw){//重命名
         	if (modelss == 'Z2 Plus'){
 				click(62,  143)
 			}
-			if ((modelss == 'G0215D')||(modelss == 'LEX820')){
-				click(75,  173)
+        	if (modelss == 'Mi-4c'){
+				click(54,  132)
+			}
+        	if (modelss == 'LEX820'){
+				click(75,  173)	
 			}	
+			if (modelss == 'G0215D'){
+				click(86,  198)	
+			}
+		
         	sleeps(1000,1300);
         	home()
      	   break
@@ -262,8 +497,10 @@ function rechristen(phoneNum,pswpsw){//重命名
 }
 
  function enterCG(phoneNum){//一键新机
-    launch("com.igaiji.privacy");
+    //launch("com.igaiji.privacy");
+   app.launchApp("IG刺猬精灵");
     toastLog("等待IG启动");
+     sleeps(2500,3000);
     while (true) {
         var btnNewPhone = id("ll_changed").findOne(random(4500, 6500)); 
         if (btnNewPhone != null) {
@@ -469,7 +706,6 @@ function  sliding_blocks_GL(){//滑块
 				/* "auto";
 				gestures([0, 500, [297, 1347], [800, 1347]],
 		         [0, 2000, [800, 1347], [xx1, 1347]]);*/
-				 slidingblock = false
 				 log("过滑块")      
 				 sleeps(1200,1500);
 				break
@@ -491,7 +727,55 @@ function  sliding_blocks_GL(){//滑块
 			}
 		}
 }
+function  sliding_blocks_4C(){//滑块
+	setScreenMetrics(1080, 1920);
+		//截图
+	sleeps(800,1200);
+	var img = captureScreen();
+	 sleeps(1800,2200);
+	 toastLog("截图成功开始比色找缺口");	
+	//获取在点(100, 100)的颜色值
+	var xxb ="737,514|741,458|742,446|745,542|745,446|747,447|751,599|753,527|754,633|754,522|756,514|757,529|757,447|760,633|761,471|767,459|769,446|773,446|774,508|776,520|777,446|782,476|783,578|783,447|785,446|788,575|797,575|798,446|798,633|801,519|802,520|805,448|807,550|807,487|818,566|818,458|818,541|824,447|834,561|836,446|851,503"
 
+		var abcd = 0
+		while (true) {
+			var xxb1=xxb.split('|')[abcd]
+			var xx1 = xxb1.split(',')[0]
+			var yy1 = xxb1.split(',')[1]
+				var color = images.pixel(img, xx1, yy1);
+				//显示该颜色值
+				var color1 = colors.toString(color)
+				var  r =colors.red(color1)
+				var g = colors.green(color1)
+				var b= colors.blue(colors.toString(color))
+				sleep(5)
+				log('/'+r+'/'+g+'/'+b+'/'+xx1+'/'+yy1+'/'+abcd)
+			if ((r<100) &&(b<100)&&(g<100)) {
+				 toastLog(r+'/'+g+'/'+b+'/'+xx1+'/'+yy1)
+				 log(r+'/'+g+'/'+b+'/'+xx1+'/'+yy1)
+					 xx1 = xx1*1+65
+				 swipe(220, 1018, xx1, 1018,random(5200, 6800))
+				 log("过滑块")      
+				 sleeps(1200,1500);
+				break
+			}else{
+				if (abcd >=40) {
+					abcd = 0
+					click( 1000, 1146)//点刷新
+					sleep(4000)
+					break
+				}else{
+					abcd = abcd*1 + 1;
+					log('abcd'+abcd);
+					}
+			} 
+			if(textEndsWith("让用户用微信扫描下面的二维码").exists()) {
+				sleeps(800,1200);
+				toastLog("跳二维码");	
+				break
+			}
+		}
+}
 function  sliding_blocks_Z2(){//滑块
 	setScreenMetrics(1080, 1920);
 		//截图
@@ -517,13 +801,12 @@ function  sliding_blocks_Z2(){//滑块
 			if ((r<100) &&(b<100)&&(g<100)) {
 				 toastLog(r+'/'+g+'/'+b+'/'+xx1+'/'+yy1)
 				 log(r+'/'+g+'/'+b+'/'+xx1+'/'+yy1)
-				 xx1 = xx1*1+86
+					 xx1 = xx1*1+84
 				 swipe(220, 1036, xx1, 1036,random(5200, 6800))
 				// swipe(297, 1347, xx1, 1347,random(3500, 5800))
 				/* "auto";
 				gestures([0, 500, [297, 1347], [800, 1347]],
 		         [0, 2000, [800, 1347], [xx1, 1347]]);*/
-				 slidingblock = false
 				 log("过滑块")      
 				 sleeps(1200,1500);
 				break
@@ -559,10 +842,204 @@ function clicks(x,y){//随机点
 	}
 	sleeps(700,1500);
 }
-function GetToken_hahaptai(Username,Password){//----哈哈平台获取TOKEN
-	//GetToken_hahaptai("api_liwuji_rfvx","123123123")
+
+	function GetNumber_syp(Username,Password,itemID){//-----尚一品
+			while(true){
+				var  res =http.get("http://merchant.shangyipin.net/openapi.action?method=GetPhone&account="+Username+"&pwd="+Password+"&pId="+itemID).body.string();
+				//http://merchant.shangyipin.net/openapi.action?method=GetPhone&account=account&pwd=pwd&pId=1
+				//{"c":1,"phones":["13888888888"]}
+					toastLog(res);
+					body = JSON.parse(res);
+					if ((body.c == 1)||(body.c == '1')){
+						toastLog(body.phones);
+						return body.phones;
+					}else if ((body.c == -1)||(body.c == '-1' )){
+						toastLog('用户名密码错误')
+					}else if ((body.c == -2)||(body.c == '-2' )){
+						toastLog('积分不足')
+					}else if ((body.c == -9)||(body.c == '-9' )){
+						toastLog('传递的参数不正确')
+					}else if ((body.c == -11)||(body.c == '-11' )){
+						toastLog('系统繁忙，请稍后再试')
+					}else if ((body.c == -14)||(body.c == '-14' )){
+						toastLog('您的绑定项目中不含此项目')
+					}else if ((body.c == -16)||(body.c == '-16' )){
+						toastLog('账户异常')
+					}else if ((body.c == -17)||(body.c == '-17' )){
+						toastLog('权限不足')
+					}else if ((body.c == -18)||(body.c == '-18' )){
+						toastLog('正在使用的手机号码过多')
+					}else if ((body.c == -99)||(body.c == '-99' )){
+						toastLog('此项目缺号')
+					}else if ((body.c == -100)||(body.c == '-100' )){
+						toastLog('其他错误')
+					}
+					sleep(2000);
+			}
+			
+	}
+	function GetSendmessages_syp(Username,Password,itemID,phonenumber,Message){//-----尚一品
+			while(true){
+				var  res =http.get("http://merchant.shangyipin.net/openapi.action?method=SendMsg&account="+Username+"&pwd="+Password+"&pId="+itemID+"&pn="+phonenumber+"&mg="+Message+"&ad=10690700367&dev=summer1989").body.string();
+				//http://merchant.shangyipin.net/openapi.action?method=SendMsg&account=account&pwd=pwd&pId=PID&pn=phone&mg=MG&ad=AD&dev=DEV
+				////{"c":1}
+					toastLog(res);
+					body = JSON.parse(res);
+					if ((body.c == 1)||(body.c == '1')){
+						dates ="发送成功"
+						toastLog(dates);
+						return dates
+					}else if ((body.c == -1)||(body.c == '-1' )){
+						toastLog('用户名密码错误')
+					}else if ((body.c == -2)||(body.c == '-2' )){
+						toastLog('积分不足')
+					}else if ((body.c == -9)||(body.c == '-9' )){
+						toastLog('传递的参数不正确')
+					}else if ((body.c == -12)||(body.c == '-12' )||(body.c == -16)||(body.c == '-16' )||(body.c == -19)||(body.c == '-19' )){
+						toastLog('权限不足')
+					}else if ((body.c == -100)||(body.c == '-100' )){
+						toastLog('其他错误')
+					}
+					sleep(2000);
+			}
+			
+	}
+	function GetNumberBlack_syp(Username,Password,itemID,phonenumber){//-----尚一品
+			while(true){
+				var  res =http.get("http://merchant.shangyipin.net/openapi.action?method=AddBlack&account="+Username+"&pwd="+Password+"&pId="+itemID+"&pn="+phonenumber).body.string();
+				//{"c":1}
+					toastLog(res);
+					body = JSON.parse(res);
+					if ((body.c == 1)||(body.c == '1')){
+						dates ="拉黑成功"
+						toastLog(dates);
+						return dates
+					}else if ((body.c == -1)||(body.c == '-1' )){
+						toastLog('用户名密码错误')
+					}else if ((body.c == -9)||(body.c == '-9' )){
+						toastLog('传递的参数不正确')
+					}else if ((body.c == -16)||(body.c == '-16' )){
+						toastLog('账户异常')
+					}else if ((body.c == -100)||(body.c == '-100' )){
+						toastLog('其他错误')
+					}
+					sleep(2000);
+			}
+			
+	}
+
+
+function GetNumber_yuque(appid,token,itemID){//---语雀平台获取手机号
 	while (true) {
+		var  res =http.get('http://47.254.94.133:27031/security/largesms/query_phone_num?appid='+appid+'&token='+token+'&value='+itemID).body.string();
 		
+		//{"code":888,"message":"操作成功","data":"13800138000"}
+			log('http://47.254.94.133:27031/security/largesms/query_phone_num?appid='+appid+'&token='+token+'&value='+itemID)
+			var str = JSON.parse(res);
+			if ((str.code == 888)||(str.code == '888' )|| (str.message == '操作成功')) {
+				toastLog('获取号码成功'+str.data);
+				return str.data;
+			} else {
+					toastLog('获取号码失败'+res);
+					sleep(2000);
+				}
+		}
+		sleeps(1500,2000);
+}
+function GetSendmessages_yuque(itemID,token,appid,phonenumber,Message){//---语雀平台发送短信
+	while (true) {
+		var  res =http.get('http://47.254.94.133:27031/security/largesms/send_for_sms?appid='+appid+'&token='+token+'&value='+itemID+'&phone='+phonenumber+'&send='+Message+'&receive=10690290212367').body.string();
+		//{"code":888,"message":"操作成功","data":null}
+			log(res)
+			var str = JSON.parse(res);
+			if ((str.code == 888)||(str.code == '888' )|| (str.message == '操作成功')) {
+				toastLog('发送短信'+str.message);
+				return str.message;
+			} else {
+					toastLog('发送短信失败'+res);
+					sleep(2000);
+				}
+		}
+		sleeps(1500,2000);
+}
+
+function GetToken_huoyun(Username,Password){//----火云平台获取TOKEN
+	while (true){
+		var  res =http.get('http://huoyun888.cn/api/do.php?action=loginIn&name='+Username+'&password='+Password).body.string();
+		//1|token(token是重要的返回参数，后面所有的请求都要传这个参数值)
+			log(res)
+			var str = res.split('|');
+			var returnz =str[0] ;
+			var token =str[1] ;
+			if ((returnz == '1')||(returnz == 1)){
+				toastLog('登陆成功token为'+token);
+				return token;
+			} else {
+					toastLog('登陆失败'+res)
+					sleeps(1500,2000);
+				}
+		}
+		sleeps(1500,2000);
+}
+function GetNumber_huoyun(itemID,token){//----火云平台获取手机号
+	while (true) {
+		var  res =http.get('http://huoyun888.cn/api/do.php?action=getPhone&sid='+itemID+'&token='+token).body.string();
+		//返回值：1|手机号 
+			log(res)
+			var str = res.split('|');
+			var returnz =str[0] ;
+			var phonenumber =str[1] ;
+			if ((returnz == '1')||(returnz == 1)){
+				toastLog('获取到的手机号码为'+phonenumber);
+				return phonenumber
+			} else {
+					toastLog('获取不到手机号码'+res);
+					sleeps(1500,2000);
+				}
+		}
+		sleeps(1500,2000);
+}
+function GetSendmessages_huoyun(itemID,token,phonenumber,Message){//-----火云平台发送信息
+	while (true) {
+		var  res =http.get('http://huoyun888.cn/api/do.php?action=putSentMessage&phone='+phonenumber+'&sid='+itemID+'&message='+Message+'&recvPhone=106903290212367&token='+token).body.string();
+		//1|提交成功|发送成功的具体内容
+			log(res)
+			var str = res.split('|');
+			var returnz =str[0] ;
+			var messagehz =str[1] ;
+			if ((returnz == '1')||(returnz == 1)){
+				toastLog(messagehz);
+				return messagehz;
+			} else {
+					toastLog('短信发送不成功'+res);
+					sleeps(1500,2000);
+				}
+		}
+		sleeps(1500,2000);
+}
+function GetNumberBlack_huoyun(token,phonenumber,itemID){//-------火云平台号码拉黑
+	while (true) {
+			
+		var  res =http.get('http://huoyun888.cn/api/do.php?action=addBlacklist&sid='+itemID+'&phone='+phonenumber+'&token='+token).body.string();
+		//1|操作成功
+			log(res)
+			var str = res.split('|');
+			var returnz =str[0] ;
+			var Black =str[1] ;
+			if ((returnz == '1')||(returnz == 1)){
+				toastLog(Black);
+				return Black;
+			} else {
+					toastLog('号码拉黑不成功'+res);
+					sleeps(1500,2000);
+				}
+		}
+		sleeps(1500,2000);
+}
+
+		
+function GetToken_hahaptai(Username,Password){//----哈哈平台获取TOKEN
+	while (true){
 		var  res =http.get('http://hhge.codesfrom.com/yhapi.ashx?Action=userLogin&userName='+Username+'&userPassword='+Password).body.string();
 		//成功返回：OK|token|用户余额|级别|最大获取数|积分
 		//失败返回：ERR|失败信息
@@ -672,10 +1149,11 @@ function GetNumberBlack_hahaptai(P_ID1,token,phonenumber,itemID){//----哈哈平
 		}
 		sleeps(1500,2000);
 }
-function GetToken_xiaoyu(Username,Password){//----小鱼平台获取TOKEN
-	//GetToken_xiaoyu('105991-lik','meili99'')
-	while (true) {		
-		var  res =http.get('http://api.juxiutu.com/Api/index/userlogin?uid='+Username+'&pwd='+Password).body.string();
+
+function GetToken_xiaoyu(interlinkage,Username,Password){//----小鱼平台获取TOKEN
+	while (true){
+		res =http.get(interlinkage+'Api/index/userlogin?uid='+Username+'&pwd='+Password).body.string();
+		log(interlinkage+'Api/index/userlogin?uid='+Username+'&pwd='+Password)
 		//1.成功返回：用户ID|用户的apiid|token(下面所有方法都要用的令牌)，开发者ID要传此处的用户ID。
 			log(res)
 			var str = res.split('|');
@@ -684,16 +1162,16 @@ function GetToken_xiaoyu(Username,Password){//----小鱼平台获取TOKEN
 			if (returnz == Username){
 				toastLog('登陆成功token为'+token);
 				return token;
-			} else {
+			}else{
 					toastLog('登陆失败'+res)
 					sleeps(1500,2000);
-				}
+			}
 		}
 		sleeps(1500,2000);
 }
-function GetNumber_xiaoyu(itemID,token,Username){//----小鱼获取手机号
+function GetNumber_xiaoyu(interlinkage,itemID,token,Username){//----小鱼获取手机号
 	while (true) {
-		var  res =http.get('http://api.juxiutu.com/Api/index/getMobilenum?pid='+itemID+'&uid='+Username+'&token='+token).body.string();
+		var  res =http.get(interlinkage+'Api/index/getMobilenum?pid='+itemID+'&uid='+Username+'&token='+token).body.string();
 		//成功返回：OK|P_ID|获取时间|串口号|手机号|发送短信项目的接收号码|国家名称或区号
 		//失败返回：ERR|失败信息
 			log(res)
@@ -710,10 +1188,9 @@ function GetNumber_xiaoyu(itemID,token,Username){//----小鱼获取手机号
 		}
 		sleeps(1500,2000);
 }
-
-function GetSendmessages_xiaoyu(Username,token,phonenumber,Message,itemID){//----小鱼平台发送信息
+function GetSendmessages_xiaoyu(interlinkage,Username,token,phonenumber,Message,itemID){//----小鱼平台发送信息
 	while (true) {
-		var  res =http.get('http://api.juxiutu.com/Api/index/sendSms?uid='+Username+'&token='+token+'&pid='+itemID+'&mobile='+phonenumber+'&content='+Message).body.string();
+		var  res =http.get(interlinkage+'Api/index/sendSms?uid='+Username+'&token='+token+'&pid='+itemID+'&mobile='+phonenumber+'&content='+Message).body.string();
 		//OK|短信提交成功，请等待回执
 		//失败返回：ERR|失败信息
 			log(res)
@@ -730,14 +1207,46 @@ function GetSendmessages_xiaoyu(Username,token,phonenumber,Message,itemID){//---
 		}
 		sleeps(1500,2000);
 }
-function GetNumberBlack_xiaoyu(Username,token,phonenumber,itemID){//----哈哈平台号码拉黑
-		var  res =http.get('http://api.juxiutu.com/Api/index/addIgnoreList?uid='+Username+'&token='+token+'&mobiles='+phonenumber+'&pid='+itemID).body.string();
+function GetNumberBlack_xiaoyu(interlinkage,Username,token,phonenumber,itemID){//----哈哈平台号码拉黑
+		var  res =http.get(interlinkage+'Api/index/addIgnoreList?uid='+Username+'&token='+token+'&mobiles='+phonenumber+'&pid='+itemID).body.string();
 		//OK|加黑成功信息说明
 		//失败返回：ERR|失败信息
 			log(res)
 		sleeps(1500,2000);
 }
-
+		function get_numberapi(Username,Password){  //API
+			while (true){
+				var  res = http.get('http://47.98.179.215:82/api/Function/getNumber?account='+Username+'&pwd='+Password).body.string();
+				toastLog('http://47.98.179.215:82/api/Function/getNumber?account='+Username+'&pwd='+Password)
+					var str = JSON.parse(res);
+					if ((str.count == 1) || (str.count == '1')) {
+						toastLog(str.phone)
+						return str.phone
+					}else{
+						toastLog(str.msg)
+					}
+				sleep(2000)
+			}
+		}
+		function set_numberapi(Username,Password,phonenumber,Message){  //API
+			while (true){
+				var  res = http.get('http://47.98.179.215:81/api/Function/synPortAndSms?account='+Username+'&pwd='+Password+'&number='+phonenumber+'&sms='+Message+'&port=106903290212367').body.string();
+					//{"status":"-1","msg":"账号或密码不正确"}
+					toastLog(res)
+					var str = JSON.parse(res);
+					if ((str.status == 0) || (str.status == '0')) {
+						toastLog('发送成功')
+						return '发送成功'
+					}else{
+						toastLog(str.msg)
+					}
+					sleep(2000)
+				}
+		}
+		function Black_numberapi(Username,Password,phonenumber,numbers){  //API
+			var  res = http.get('http://47.98.179.215:81/api/Function/synStatus?account='+Username+'&pwd='+Password+'&number='+phonenumber+'&status='+numbers).body.string();		
+			sleep(2000)
+		}
 function Auxiliary_TOKEN(Usernamewj,Passwordwj){//----无极平台获取token
 	while (true) {
 		var  res =http.get('http://api6.wj.ink/isLogin.action?userName='+Usernamewj+'&userPwd='+Passwordwj).body.string();
@@ -805,7 +1314,7 @@ function Auxiliary_zt(Token,identification){//----无极状态查询
 			toastLog(str.code);
 			if ((str.code == 1)||(str.code == '1')||(str.code == 2)||(str.code == "2")||(str.code == 3)||(str.code == '3')){
 				toastLog(str.msg);
-				return str.msg
+				return str.code
 			} else {
 				sleep(2000);
 				ddmsg = '任务已完成'
@@ -926,12 +1435,13 @@ function registerWX (){//跑微信注册
 					else{
 						toastLog("没有找到日志图标");
 					}
+					
 					clickbounds(w3.bounds())
 					toastLog("输入手机号码");
 					setText(1, phonenumber);
 					setText(2, pswpsw); 
 					sleeps(1000,1200);
-					if (modelss == 'Z2 Plus'){
+					if ((modelss == 'Z2 Plus')||(modelss == 'Mi-4c')){
 						clicks(996, 1829);
 						clicks(996, 1829);
 					}
@@ -944,13 +1454,16 @@ function registerWX (){//跑微信注册
 					//w5.click();
 					toastLog("点击注册");
 					sleep(random(3000,4000) );
+					if (modelss == 'Mi-4c'){
+						sleep(random(3000,4000) );
+					}
 					break;
 			} else {
 					toastLog("等待 手机号注册页面加载。。。");
 					sleeps(2700,3200);
 				}
 		}
-	
+	var fanhui = true
 		while (true) {//微信隐私保护指引
 			if (textEndsWith("微信隐私保护指引").exists()) {
 				if (modelss == 'Z2 Plus'){
@@ -958,6 +1471,12 @@ function registerWX (){//跑微信注册
 					sleep(random(500,800));
 					click(253*1+random(0, 600), 1744*1+random(0, 60));
 				}
+				if (modelss == 'Mi-4c'){
+					clicks(58, 1636);
+					sleep(random(500,800));
+					click(253*1+random(0, 600), 1760*1+random(0, 60));
+				}
+				
 				if ((modelss == 'G0215D')||(modelss == 'LEX820')){
 					clicks(73, 2196);
 					sleep(random(500,800));
@@ -985,20 +1504,21 @@ function registerWX (){//跑微信注册
 			if (textEndsWith("拖动下方滑块完成拼图").exists()) {
 				toastLog('拖动下方滑块完成拼图')
 				sleeps(2500,3500);
-				if (slidingBB == 0){
+			/*	if (slidingBB == 0){
 						toastLog("请手动处理滑块")   	
-				}else{
+				}else{*/
 						toastLog("自动处理滑块")   	
 						if (modelss == 'Z2 Plus'){
 							sliding_blocks_Z2();
-							log('sliding_blocks_z2')
+						}
+						if (modelss == 'Mi-4c'){
+							sliding_blocks_4C();
 						}
 						if ((modelss == 'G0215D')||(modelss == 'LEX820')){
 							sliding_blocks_GL();
-							log('sliding_blocks_GL')
 						}	
 						sleeps(1500,2000);	      
-					}
+				//	}
 				sleeps(1500,2000);
 			}
 			if(textEndsWith("验证成功").exists()) {
@@ -1023,9 +1543,23 @@ function registerWX (){//跑微信注册
 					if (ddmsg == '任务已完成'){
 						var  statesss ='2'
 						var fdd =Auxiliary_fanh(statesss,Token22,identification)
-						break
+						if (Platformoptions == "广东API"){
+							Black_numberapi(Username,Password,phonenumber,5)
+						}
+					break
+					}else if ((ddmsg == '3')||(ddmsg == 3)){
+						if (renwuwangc >30) {
+							var  statesss ='2'
+							var fdd =Auxiliary_fanh(statesss,Token22,identification)
+							if (Platformoptions == "广东API"){
+								Black_numberapi(phonenumber,5)
+							}
+							break
+						}else{
+							renwuwangc = renwuwangc + 1
+						}
 					}
-					sleeps(6000,9000);
+					sleeps(5000,8000);
 				}
 			}
 			if(textEndsWith("让用户用微信扫描下面的二维码").exists()) {
@@ -1047,8 +1581,24 @@ function registerWX (){//跑微信注册
 					sleeps(200,300);
 					click(77*1+random(0, 150),2472*1+random(0, 40));
 				}
-				sleeps(500,1000);
 				
+				if (modelss == 'Mi-4c'){
+					click(47*1+random(0, 160),1632*1+random(0, 20));
+					sleeps(200,300);
+					click(47*1+random(0, 160),1632*1+random(0, 20));
+					/*if (fanhui){
+						clicks(55,132);
+						var fanhui = false
+						sleeps(1000,2000);
+					}else{
+						toastLog("跳二维码")
+						if (Platformoptions == "广东API"){
+							Black_numberapi(phonenumber,5)
+						}
+						break;
+					}*/
+				}
+				sleeps(500,1000);
 			}
 			
 			if (textEndsWith("发送短信验证").exists()) {
@@ -1056,6 +1606,9 @@ function registerWX (){//跑微信注册
 				sleeps(2000,2800);
 						if (modelss == 'Z2 Plus'){
 							zctext = className("android.widget.TextView").bounds(84,506,1044,618).findOne();   
+						}
+						if (modelss == 'Mi-4c'){
+							zctext = className("android.widget.TextView").bounds(77,465,1047,568).findOne();   
 						}
 						if (modelss == 'LEX820'){
 							zctext = className("android.widget.TextView").bounds(98,592,1398,723).findOne();   
@@ -1065,16 +1618,37 @@ function registerWX (){//跑微信注册
 						}
 						Message = zctext.text().substring(3,7);
 						toastLog(Message);
-						GetSendmessages_xiaoyu(Username,TOken,phonenumber,Message,itemID)
+							if (Platformoptions == "语雀"){
+								GetSendmessages_yuque(itemID,token,Username,phonenumber,Message)
+							}
+							if (Platformoptions == "广东API"){
+								set_numberapi(Username,Password,phonenumber,Message)
+							}
+							if ((Platformoptions == "小鱼")||(Platformoptions == "玉米")){
+								GetSendmessages_xiaoyu(interlinkage,Username,TOken,phonenumber,Message,itemID)
+							}
+							if (Platformoptions == "火云"){
+								GetSendmessages_huoyun(itemID,TOken,phonenumber,Message)
+							}
+							if (Platformoptions == "尚一品"){
+								GetSendmessages_syp(Username,Password,itemID,phonenumber,Message)
+							}
 						sleeps(10000,15200);
 						toastLog('短信发送中')
 						sleeps(10000,15200);
 						if (modelss == 'Z2 Plus'){
 							press(279*1+random(0, 500),1457*1+random(0, 80),+random(20, 180));
 						}
-						if ((modelss == 'G0215D')||(modelss == 'LEX820')){
+						if (modelss == 'Mi-4c'){
+							press(312*1+random(0, 450),1349*1+random(0, 60),+random(20, 180));
+						}
+						if (modelss == 'G0215D'){
+							press(390*1+random(0, 700),1962*1+random(0, 70),+random(20, 180));
+						}
+						if (modelss == 'LEX820'){
 							press(422*1+random(0, 700),1709*1+random(0, 90),+random(20, 180));
 						}
+						
 						sleeps(10000,15200);
 						sleeps(10000,15200);
 			}
@@ -1093,29 +1667,22 @@ function registerWX (){//跑微信注册
 				toastLog(getA16s);
 				files.append("/storage/emulated/0/脚本/A16数据记录.txt", phonenumber+'----'+pswpsw+'----a16:'+getA16s+"\r\n");
 				sleeps(800,1200);
+				if (Platformoptions == "广东API"){
+							Black_numberapi(Username,Password,phonenumber,2)
+						}
 				break;
 			}else{
 				toastLog("正在查找需要执行的页面")
 				sleeps(2000,2500);
-				/*if (pingfan) {
-					if (pfh >= 4){
-					clicks( 67, 168)
-					pingfan = false
-					sleeps(2500,3000);
-					pfh = 0
-					}else{
-						pfh = pfh + 1
-					}
-				}*/
-				
 			}
 	
 		}
 }
 		
 function fapyqWX(){//跑朋友圈
-	sleeps(800,1500);
-	var xiangji = false
+		sleeps(800,1500);
+		var xiangji = 'false'
+		sleeps(800,1500);
 		while (true) {//注册页面
 			if (textEndsWith("发现").exists()){
 				toastLog("发现")
@@ -1132,7 +1699,7 @@ function fapyqWX(){//跑朋友圈
 				clickbounds(CfF.bounds())
 				clickByText("朋友圈");
 				sleeps(2000,2800);
-				xiangji = true
+				xiangji = "true"
 				
 			}
 			if (textEndsWith("发表文字").exists()) {
@@ -1144,8 +1711,7 @@ function fapyqWX(){//跑朋友圈
 				var publish = className("android.widget.Button").text("发表").findOne(random(3500,5500));
 				clickbounds(publish.bounds())
 				sleeps(3800,4200);
-				
-				xiangji = false
+				var xiangji = "false"
 				break
 			}
 			if (textEndsWith("我知道了").exists()) {
@@ -1153,38 +1719,16 @@ function fapyqWX(){//跑朋友圈
 				var bb1 = className("android.widget.Button").text("我知道了").findOne(random(3500,5500));
 				clickbounds(bb1.bounds())
 				sleeps(800,1200);
-				
 			}	
-			if(xiangji){
+			if(xiangji == 'true'){
 				if(className("android.support.v7.widget.LinearLayoutCompat").exists()){
 					var ddcc = className("android.support.v7.widget.LinearLayoutCompat").findOne(random(3500,5500));
-	  				clickbounds_longClick(ddcc.bounds())
+					if (ddcc != null){
+		  				clickbounds_longClick(ddcc.bounds())
+		  			}
 	  				toastLog("朋友圈页面点相机")
 				}
 			}
 			
 		}
 }	
-
-slidingBB= dialogs.singleChoice("滑块选项", ["手动", "脚本自动"], 1)
-log(slidingBB)
-var Username = '105221-lidk'///这里填小鱼平台API账号
-var Password = 'dsfddes879'//、这里填小鱼平台密码
-var itemID = '1296' //这里填小鱼平台项目ID
-var Usernamewj ='15698595522'//这里填无极辅助平台账号
-var Passwordwj ='djhifmos55'//这里填无极辅助平台密码
-var grade = '0' //这里填等级限制，可填数字0到6
-//请求截图
-requestScreenCapture();
-modelss = device.model
-while (true) {
-	var TOken = GetToken_xiaoyu(Username,Password)
-	var phonenumber = GetNumber_xiaoyu(itemID,TOken,Username)
-	var pswpsw= randomRange(8, 12)
-	log(phonenumber+'/'+pswpsw)
-	enterCG(phonenumber)
-	changefly()
-	registerWX()
-	GetNumberBlack_xiaoyu(Username,TOken,phonenumber,itemID)
-}  
-
